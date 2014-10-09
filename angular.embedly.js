@@ -1,4 +1,4 @@
-/* 
+/*
  * Angular Embed.ly library
  * Version 1.0
  * Author:  Sarah Green
@@ -21,7 +21,7 @@ var UTILS = {
     return (typeof n === 'number' && isFinite(n) && n % 1 === 0);
   },
 
-  /* 
+  /*
    * UTILS.none()
    * Check if an object is null or undefined
    */
@@ -78,7 +78,7 @@ var UTILS = {
     });
   },
 
-  /* 
+  /*
    * UTILS.listify()
    * Make an object into a list
    */
@@ -299,7 +299,7 @@ angular.module('ngEmbedApp', [])
 
       // Set up triggers, to listen when tag has been initialized
       var self = this;
-      
+
       this.loaded.promise.then(function() {
         self.$elem.triggerHandler('loaded', [self]);
       });
@@ -393,7 +393,7 @@ angular.module('ngEmbedApp', [])
       }
       else {
         this.$elem.replaceWith(this.code);
-      } 
+      }
 
       this.$elem.triggerHandler('displayed', [this]);
     }
@@ -413,7 +413,7 @@ angular.module('ngEmbedApp', [])
   // If no custom options are specified
   var defaults = {
     key:              null,
-    endpoint:         'oembed',         // Default endpoint (preview and objectify available too)
+    endpoint:         'extract',         // Default endpoint (preview and objectify available too)
     secure:           null,             // Use https endpoint vs http
     query:            {},
     method:           'replace',        // Embed handling option for standard callback
@@ -484,9 +484,9 @@ angular.module('ngEmbedApp', [])
 
 })
 
-/* 
+/*
  * ngEmbedly directive
- * Parses DOM searching for 'a' tags, making calls to Embed.ly for each valid 
+ * Parses DOM searching for 'a' tags, making calls to Embed.ly for each valid
  * link and displaying photo/video/rich media responses as embeds on the DOM
  */
 .directive('ngEmbedly', function($timeout, API, Embedly) {
@@ -534,7 +534,7 @@ angular.module('ngEmbedApp', [])
           } else {
             angular.forEach( ($element.find('a')), function(elm) {
               if (!UTILS.none(angular.element(elm).attr('href'))) {
-                create(elm);                                                
+                create(elm);
               }
             });
           }
@@ -546,8 +546,8 @@ angular.module('ngEmbedApp', [])
         }
 
         var deferred = API.request(
-          options.endpoint, 
-          nodeUrls, 
+          options.endpoint,
+          nodeUrls,
           options);
 
         if (deferred) {
@@ -562,10 +562,10 @@ angular.module('ngEmbedApp', [])
   };
 })
 
-/* 
+/*
  * ngEmbedUrls directive
- * Watches for a change in $scope.urls, making calls and appending embeds 
- * on the DOM when new urls are added (see demo/post_demo.html for an example 
+ * Watches for a change in $scope.urls, making calls and appending embeds
+ * on the DOM when new urls are added (see demo/post_demo.html for an example
  * implementation)
  */
 .directive('ngEmbedUrls', function($compile, $timeout, API, Embedly) {
@@ -592,7 +592,7 @@ angular.module('ngEmbedApp', [])
     link: function ($scope, $element) {
 
       var options = $scope.options;
-   
+
       var nodes = {};
       var response = {};
 
@@ -619,8 +619,8 @@ angular.module('ngEmbedApp', [])
 
         // Make API requests for urls in nodeUrls
         var deferred = API.request(
-          options.endpoint, 
-          nodeUrls, 
+          options.endpoint,
+          nodeUrls,
           options);
 
         if (deferred) {
